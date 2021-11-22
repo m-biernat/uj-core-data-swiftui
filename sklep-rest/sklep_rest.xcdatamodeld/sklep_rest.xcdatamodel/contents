@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Kategoria" representedClassName="Kategoria" syncable="YES" codeGenerationType="class">
+        <attribute name="server_id" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="produkt" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Produkt" inverseName="kategoria" inverseEntity="Produkt"/>
+    </entity>
+    <entity name="Produkt" representedClassName="Produkt" syncable="YES" codeGenerationType="class">
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="image_url" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="server_id" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="kategoria" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kategoria" inverseName="produkt" inverseEntity="Kategoria"/>
+    </entity>
+    <elements>
+        <element name="Kategoria" positionX="-54" positionY="18" width="128" height="74"/>
+        <element name="Produkt" positionX="-63" positionY="-18" width="128" height="119"/>
+    </elements>
+</model>
