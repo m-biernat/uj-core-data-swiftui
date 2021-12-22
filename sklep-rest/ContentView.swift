@@ -28,7 +28,7 @@ struct MainView: View {
                     //NavigationLink(kategoria.value(forKey: "title") as! String, destination: ProduktView(kategoria: kategoria.))
                 }
             }
-        }
+        }.navigationBarTitle("Sklep").navigationBarTitleDisplayMode(.large)
         }
     }
 }

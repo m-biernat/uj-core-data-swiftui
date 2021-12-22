@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 
+let url = "https://2ad1-195-82-43-75.ngrok.io"
+
 @main
 struct sklep_restApp: App {
     let persistenceController = PersistenceController.shared
@@ -29,7 +31,7 @@ extension sklep_restApp {
     
     func loadCategoriesFromAPI() {
         let context = persistenceController.container.viewContext
-        let serverURL = "https://4360-2a01-115f-440b-7200-c14e-c1ec-9727-1858.ngrok.io/kategoria"
+        let serverURL = url + "/kategoria"
         
         let url = URL(string: serverURL)
         let request = URLRequest(url: url!)
@@ -96,7 +98,7 @@ extension sklep_restApp {
     
     func loadProductsFromAPI() {
         let context = persistenceController.container.viewContext
-        let serverURL = "https://4360-2a01-115f-440b-7200-c14e-c1ec-9727-1858.ngrok.io/produkt"
+        let serverURL = url + "/produkt"
         
         let url = URL(string: serverURL)
         let request = URLRequest(url: url!)

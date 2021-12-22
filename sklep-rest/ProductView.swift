@@ -28,16 +28,26 @@ struct ProductView: View {
     }
     
     var body: some View {
+        
         List {
         ForEach(sample()) { produkt in
             HStack{
-                Text(produkt.title!)
-                Button(action: {}) {
-                    Text("Add to basket").padding(.trailing)
+                VStack(alignment: .leading) {
+                    Text(produkt.title!)
+                    Spacer()
+                    Text(produkt.desc!).font(.caption)
                 }
-            }
+                Spacer()
+                let quantity = String(produkt.quantity)
+                Text(quantity + " szt.").font(.caption)
+                Button(action: {}) {
+                    Image(systemName: "cart.badge.plus")
+                }
+            }.padding(.vertical, 8)
         }
         }
+        .navigationTitle(kategoria.title!)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
