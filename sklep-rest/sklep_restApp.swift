@@ -8,7 +8,10 @@
 import SwiftUI
 import CoreData
 
-let url = "https://2ba2-195-82-43-75.ngrok.io"
+struct sklep_appData {
+    static let url = "https://2d46-195-82-43-75.ngrok.io"
+    static let clientID = "00000000-0000-0000-0000-000000000001"
+}
 
 @main
 struct sklep_restApp: App {
@@ -17,6 +20,7 @@ struct sklep_restApp: App {
     init() {
         loadCategoriesFromAPI()
         loadProductsFromAPI()
+        loadCartFromAPI()
     }
     
     var body: some Scene {
@@ -31,7 +35,7 @@ extension sklep_restApp {
     
     func loadCategoriesFromAPI() {
         let context = persistenceController.container.viewContext
-        let serverURL = url + "/kategoria"
+        let serverURL = sklep_appData.url + "/kategoria"
         
         let url = URL(string: serverURL)
         let request = URLRequest(url: url!)
@@ -98,13 +102,15 @@ extension sklep_restApp {
     
     func loadProductsFromAPI() {
         let context = persistenceController.container.viewContext
-        let serverURL = url + "/produkt"
+        let serverURL = sklep_appData.url + "/produkt"
         
         let url = URL(string: serverURL)
         let request = URLRequest(url: url!)
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
+        
+        let dispatchGroup = DispatchGroup()
         
         let produktEntity = NSEntityDescription.entity(forEntityName: "Produkt", in: context)
         
@@ -156,6 +162,81 @@ extension sklep_restApp {
                             let title = item["title"] as! String
                             let server_id = item["id"] as! String
                             print("Produkt: \(title) o id: \(server_id) jest już w bazie")
+                        }
+                    }
+                    try context.save()
+                    dispatchGroup.leave()
+                } else {
+                    print("Błędny JSON")
+                }
+                
+            } catch {
+                print("Unexpected error: \(error).")
+                print("Problem z pobraniem odpowiedzi")
+                dispatchGroup.leave()
+                return
+            }
+        })
+        dispatchGroup.enter()
+        task.resume()
+        dispatchGroup.wait()
+    }
+    
+    func loadCartFromAPI() {
+        let context = persistenceController.container.viewContext
+        let serverURL = sklep_appData.url + "/koszyk/klient/" + sklep_appData.clientID
+        
+        let url = URL(string: serverURL)
+        let request = URLRequest(url: url!)
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let koszykEntity = NSEntityDescription.entity(forEntityName: "Koszyk", in: context)
+        
+                
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            
+            guard error == nil else {
+                print("Houston mamy problem")
+                return
+            }
+            
+            guard data != nil else {
+                print("Nie ma danych")
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                if let object = json as? [String:Any] {
+                    print(object)
+                } else if let object = json as? [Any] {
+                    for item in object as! [Dictionary<String, AnyObject>] {
+                        if !checkIfExists(model: "Koszyk", field: "server_id", fieldValue: item["id"] as! String) {
+                        let server_id = item["id"] as! String
+                        let quantity = item["quantity"] as! Int
+                        let produkt_id = item["produkt_id"] as! NSDictionary
+                        let prod_id = produkt_id["id"] as! String
+                        let prodRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Produkt")
+                        let predicate = NSPredicate(format: "server_id == %@", prod_id)
+                        
+                            prodRequest.predicate = predicate
+                        
+                            let prod = try! context.fetch(prodRequest).first as! Produkt
+                        
+                        let koszyk = NSManagedObject(entity: koszykEntity!, insertInto: context)
+                        
+                        koszyk.setValue(server_id, forKey: "server_id")
+                        koszyk.setValue(quantity, forKey: "quantity")
+                        koszyk.setValue(prod, forKey: "produkt")
+                        
+                            print("Dodano produkt: \(prod.title!) x \(quantity) do koszyka")
+                        } else {
+                            let prod_id = item["produkt_id"] as! NSDictionary
+                            let id = prod_id["id"] as! String
+                            let quantity = item["quantity"] as! Int
+                            print("Produkt o id: \(id) x \(quantity) jest już w koszyku")
                         }
                     }
                     try context.save()

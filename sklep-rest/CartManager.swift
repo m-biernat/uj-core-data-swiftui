@@ -5,7 +5,6 @@
 //  Created by user209006 on 12/27/21.
 //
 
-import Foundation
 import CoreData
 
 struct CartManager {
@@ -70,9 +69,14 @@ struct CartManager {
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Koszyk")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
-        try! context.execute(deleteRequest)
+        let objects = try? context.fetch(fetchRequest) as? [Koszyk]
+        
+        objects?.forEach { koszyk in
+            context.delete(koszyk)
+        }
+        
+        try! context.save()
     }
     
     static func checkIfExists(model: String, field: String, fieldValue: String) -> Bool {
