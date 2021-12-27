@@ -9,19 +9,45 @@ import SwiftUI
 
 struct CartView: View {
     @Environment(\.presentationMode) var presentationMode
+    @State var refresh = false
     
     var body: some View {
         Text("Koszyk").font(.headline).padding(.top)
         
-        List {
-            Text("aaa")
-            Text("bbb")
-            Text("aaa")
-            Text("bbb")
-            Text("aaa")
-            Text("bbb")
-            Text("aaa")
-            Text("bbb")
+        let productsInCart = CartManager.getCartEntries()
+        
+        let isCartEmpty = productsInCart.count < 1
+        
+        if isCartEmpty {
+            Spacer()
+            Text("Koszyk jest pusty")
+                .foregroundColor(Color.gray)
+            Spacer()
+        } else {
+            List {
+                ForEach(productsInCart) { koszyk in
+                    HStack{
+                        VStack(alignment: .leading) {
+                            Text(koszyk.produkt!.title!)
+                            Spacer()
+                            Text(koszyk.produkt!.desc!)
+                                .font(.caption)
+                                .lineLimit(1)
+                        }
+                        Spacer()
+                        let quantity = String(koszyk.quantity)
+                        Text(quantity + " szt.")
+                            .font(.caption)
+                        Button(action: {
+                            CartManager.removeFromCart(koszyk: koszyk)
+                            refresh.toggle()
+                        }) {
+                            Image(systemName: "bin.xmark")
+                                .foregroundColor(Color.red)
+                        }
+                    }.padding(.vertical, 8)
+                }
+            }
         }
         
         HStack() {
@@ -40,10 +66,13 @@ struct CartView: View {
                 .background(Color.green)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
+                .disabled(isCartEmpty)
+                .opacity(isCartEmpty ? 0 : 1)
                         
             Button(
                 action: {
-                    print("wyczysc")
+                    CartManager.removeCart()
+                    refresh.toggle()
                 },
                 label: {
                     Image(systemName: "bin.xmark")
@@ -53,6 +82,8 @@ struct CartView: View {
                 .background(Color.red)
                 .foregroundColor(Color.white)
                 .cornerRadius(5)
+                .disabled(isCartEmpty)
+                .opacity(isCartEmpty ? 0 : 1)
             
             Spacer()
             Spacer()
@@ -74,6 +105,11 @@ struct CartView: View {
             Spacer()
         }
         .padding(.bottom, 8)
+        
+        // Refresh view in a hacky way
+        if refresh != refresh {
+            Text(String(refresh))
+        }
     }
 }
 

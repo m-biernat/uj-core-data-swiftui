@@ -39,7 +39,9 @@ struct ProductView: View {
                     Spacer()
                     let quantity = String(produkt.quantity)
                     Text(quantity + " szt.").font(.caption)
-                    Button(action: {}) {
+                    Button(action: {
+                        CartManager.addToCart(produkt: produkt)
+                    }) {
                         Image(systemName: "cart.badge.plus")
                     }
                 }.padding(.vertical, 8)

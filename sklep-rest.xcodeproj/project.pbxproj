@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15039BA62779B0D600EC511A /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15039BA52779B0D600EC511A /* CartManager.swift */; };
 		15DF8157277912C50049BD5A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF8156277912C50049BD5A /* CartView.swift */; };
 		27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */; };
 		27326CC025B5E55200E75CF1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBF25B5E55200E75CF1 /* MainView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15039BA52779B0D600EC511A /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		15DF8156277912C50049BD5A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27326CBA25B5E55200E75CF1 /* sklep-rest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sklep-rest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sklep_restApp.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				27326CC325B5E56C00E75CF1 /* Preview Content */,
 				92AFF3DC273D6CBB007CBD4E /* ProductView.swift */,
 				15DF8156277912C50049BD5A /* CartView.swift */,
+				15039BA52779B0D600EC511A /* CartManager.swift */,
 			);
 			path = "sklep-rest";
 			sourceTree = "<group>";
@@ -152,6 +155,7 @@
 			files = (
 				15DF8157277912C50049BD5A /* CartView.swift in Sources */,
 				27326CC725B5E56C00E75CF1 /* Persistence.swift in Sources */,
+				15039BA62779B0D600EC511A /* CartManager.swift in Sources */,
 				27326CC025B5E55200E75CF1 /* MainView.swift in Sources */,
 				27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */,
 				92AFF3DD273D6CBB007CBD4E /* ProductView.swift in Sources */,
