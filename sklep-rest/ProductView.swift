@@ -28,26 +28,23 @@ struct ProductView: View {
     }
     
     var body: some View {
-        
         List {
-        ForEach(sample()) { produkt in
-            HStack{
-                VStack(alignment: .leading) {
-                    Text(produkt.title!)
+            ForEach(sample()) { produkt in
+                HStack{
+                    VStack(alignment: .leading) {
+                        Text(produkt.title!)
+                        Spacer()
+                        Text(produkt.desc!).font(.caption).lineLimit(1)
+                    }
                     Spacer()
-                    Text(produkt.desc!).font(.caption)
-                }
-                Spacer()
-                let quantity = String(produkt.quantity)
-                Text(quantity + " szt.").font(.caption)
-                Button(action: {}) {
-                    Image(systemName: "cart.badge.plus")
-                }
-            }.padding(.vertical, 8)
-        }
-        }
-        .navigationTitle(kategoria.title!)
-        .navigationBarTitleDisplayMode(.inline)
+                    let quantity = String(produkt.quantity)
+                    Text(quantity + " szt.").font(.caption)
+                    Button(action: {}) {
+                        Image(systemName: "cart.badge.plus")
+                    }
+                }.padding(.vertical, 8)
+            }
+        }.navigationBarTitle(kategoria.title!)
     }
 }
 

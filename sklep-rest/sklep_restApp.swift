@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-let url = "https://2ad1-195-82-43-75.ngrok.io"
+let url = "https://f9eb-195-82-43-75.ngrok.io"
 
 @main
 struct sklep_restApp: App {
