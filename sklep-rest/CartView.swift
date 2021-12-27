@@ -39,8 +39,9 @@ struct CartView: View {
                         Text(quantity + " szt.")
                             .font(.caption)
                         Button(action: {
-                            CartManager.removeFromCart(koszyk: koszyk)
-                            refresh.toggle()
+                            CartManager.removeFromCart(koszyk: koszyk) { () -> () in
+                                refresh.toggle()
+                            }
                         }) {
                             Image(systemName: "bin.xmark")
                                 .foregroundColor(Color.red)
@@ -71,8 +72,9 @@ struct CartView: View {
                         
             Button(
                 action: {
-                    CartManager.removeCart()
-                    refresh.toggle()
+                    CartManager.removeCart() { () -> () in
+                        refresh.toggle()
+                    }
                 },
                 label: {
                     Image(systemName: "bin.xmark")

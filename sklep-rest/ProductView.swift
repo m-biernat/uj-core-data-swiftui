@@ -40,7 +40,9 @@ struct ProductView: View {
                     let quantity = String(produkt.quantity)
                     Text(quantity + " szt.").font(.caption)
                     Button(action: {
-                        CartManager.addToCart(produkt: produkt)
+                        CartManager.addToCart(produkt: produkt) { () -> () in
+                            
+                        }
                     }) {
                         Image(systemName: "cart.badge.plus")
                     }
