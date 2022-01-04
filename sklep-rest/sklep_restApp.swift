@@ -9,8 +9,8 @@ import SwiftUI
 import CoreData
 
 struct sklep_appData {
-    static let url = "https://a38d-195-82-43-75.ngrok.io"
-    static let clientID = "00000000-0000-0000-0000-000000000004"
+    static let url = "https://22dc-195-82-43-75.ngrok.io"
+    static let clientID = "00000000-0000-0000-0000-000000000000"
 }
 
 @main
@@ -25,8 +25,7 @@ struct sklep_restApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ContentView()
         }
     }
 }

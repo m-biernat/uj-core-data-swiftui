@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15039BA62779B0D600EC511A /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15039BA52779B0D600EC511A /* CartManager.swift */; };
 		15039BA8277A2A5800EC511A /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15039BA7277A2A5800EC511A /* RequestManager.swift */; };
+		153E1E432783D40E00DD029D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153E1E422783D40E00DD029D /* MapView.swift */; };
+		154B53A727836F9D006BE71D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B53A627836F9D006BE71D /* ContentView.swift */; };
 		15DF8157277912C50049BD5A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF8156277912C50049BD5A /* CartView.swift */; };
 		27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */; };
-		27326CC025B5E55200E75CF1 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBF25B5E55200E75CF1 /* MainView.swift */; };
+		27326CC025B5E55200E75CF1 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBF25B5E55200E75CF1 /* CategoryView.swift */; };
 		27326CC225B5E56C00E75CF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27326CC125B5E56C00E75CF1 /* Assets.xcassets */; };
 		27326CC525B5E56C00E75CF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27326CC425B5E56C00E75CF1 /* Preview Assets.xcassets */; };
 		27326CC725B5E56C00E75CF1 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CC625B5E56C00E75CF1 /* Persistence.swift */; };
@@ -20,12 +21,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15039BA52779B0D600EC511A /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		15039BA7277A2A5800EC511A /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		153E1E422783D40E00DD029D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		154B53A627836F9D006BE71D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		15DF8156277912C50049BD5A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27326CBA25B5E55200E75CF1 /* sklep-rest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sklep-rest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sklep_restApp.swift; sourceTree = "<group>"; };
-		27326CBF25B5E55200E75CF1 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		27326CBF25B5E55200E75CF1 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		27326CC125B5E56C00E75CF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27326CC425B5E56C00E75CF1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		27326CC625B5E56C00E75CF1 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -45,6 +47,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		154B53A8278370E6006BE71D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				154B53A627836F9D006BE71D /* ContentView.swift */,
+				27326CBF25B5E55200E75CF1 /* CategoryView.swift */,
+				92AFF3DC273D6CBB007CBD4E /* ProductView.swift */,
+				15DF8156277912C50049BD5A /* CartView.swift */,
+				153E1E422783D40E00DD029D /* MapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		27326CB125B5E55100E75CF1 = {
 			isa = PBXGroup;
 			children = (
@@ -65,16 +79,13 @@
 			isa = PBXGroup;
 			children = (
 				27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */,
-				27326CBF25B5E55200E75CF1 /* MainView.swift */,
-				27326CC125B5E56C00E75CF1 /* Assets.xcassets */,
-				27326CC625B5E56C00E75CF1 /* Persistence.swift */,
-				27326CCB25B5E56C00E75CF1 /* Info.plist */,
 				27326CC825B5E56C00E75CF1 /* sklep_rest.xcdatamodeld */,
-				27326CC325B5E56C00E75CF1 /* Preview Content */,
-				92AFF3DC273D6CBB007CBD4E /* ProductView.swift */,
-				15DF8156277912C50049BD5A /* CartView.swift */,
-				15039BA52779B0D600EC511A /* CartManager.swift */,
+				27326CC625B5E56C00E75CF1 /* Persistence.swift */,
+				154B53A8278370E6006BE71D /* Views */,
 				15039BA7277A2A5800EC511A /* RequestManager.swift */,
+				27326CC125B5E56C00E75CF1 /* Assets.xcassets */,
+				27326CCB25B5E56C00E75CF1 /* Info.plist */,
+				27326CC325B5E56C00E75CF1 /* Preview Content */,
 			);
 			path = "sklep-rest";
 			sourceTree = "<group>";
@@ -158,11 +169,12 @@
 			files = (
 				15DF8157277912C50049BD5A /* CartView.swift in Sources */,
 				27326CC725B5E56C00E75CF1 /* Persistence.swift in Sources */,
-				15039BA62779B0D600EC511A /* CartManager.swift in Sources */,
 				15039BA8277A2A5800EC511A /* RequestManager.swift in Sources */,
-				27326CC025B5E55200E75CF1 /* MainView.swift in Sources */,
+				27326CC025B5E55200E75CF1 /* CategoryView.swift in Sources */,
+				154B53A727836F9D006BE71D /* ContentView.swift in Sources */,
 				27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */,
 				92AFF3DD273D6CBB007CBD4E /* ProductView.swift in Sources */,
+				153E1E432783D40E00DD029D /* MapView.swift in Sources */,
 				27326CCA25B5E56C00E75CF1 /* sklep_rest.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
