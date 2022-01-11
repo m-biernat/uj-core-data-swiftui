@@ -106,7 +106,7 @@ extension ProductView {
         
         RequestManager.sendDataRequest(data: updateData,
                                        method: "PUT",
-                                       postfix: koszyk.server_id!) { (result) -> () in
+                                       postfix: "produkt/" + koszyk.server_id!) { (result) -> () in
             koszyk.quantity = Int16(result.quantity)
             
             try! viewContext.save()

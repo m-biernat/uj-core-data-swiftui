@@ -119,7 +119,7 @@ extension CartView {
             
             RequestManager.sendDataRequest(data: updateData,
                                            method: "PUT",
-                                           postfix: koszyk.server_id!) { (result) -> () in
+                                           postfix: "produkt/" + koszyk.server_id!) { (result) -> () in
                 koszyk.quantity = Int16(result.quantity)
                 
                 try! viewContext.save()
@@ -127,7 +127,7 @@ extension CartView {
             }
             
         } else {
-            RequestManager.removeDataRequest(postfix: koszyk.server_id!) { () -> () in
+            RequestManager.removeDataRequest(postfix: "produkt/" + koszyk.server_id!) { () -> () in
                 viewContext.delete(koszyk)
                 
                 try! viewContext.save()
@@ -137,7 +137,7 @@ extension CartView {
     }
     
     func removeCart(completion: @escaping () -> Void) {
-        RequestManager.removeDataRequest(postfix: "klient/" + sklep_appData.clientID) { () -> () in
+        RequestManager.removeDataRequest(postfix: sklep_appData.clientID) { () -> () in
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Koszyk")
             
             let objects = try? viewContext.fetch(fetchRequest) as? [Koszyk]

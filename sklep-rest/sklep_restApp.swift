@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct sklep_appData {
-    static let url = "https://22dc-195-82-43-75.ngrok.io"
+    static let url = "https://bbc4-195-82-43-75.ngrok.io"
     static let clientID = "00000000-0000-0000-0000-000000000000"
 }
 
@@ -183,7 +183,7 @@ extension sklep_restApp {
     
     func loadCartFromAPI() {
         let context = persistenceController.container.viewContext
-        let serverURL = sklep_appData.url + "/koszyk/klient/" + sklep_appData.clientID
+        let serverURL = sklep_appData.url + "/koszyk/" + sklep_appData.clientID
         
         let url = URL(string: serverURL)
         let request = URLRequest(url: url!)
