@@ -44,8 +44,11 @@ struct CartView: View {
                                     }
                                     Spacer()
                                     VStack() {
-                                        let price = String(koszyk.quantity) // Chnage to price later
-                                        Text(price + " szt.")
+                                        let quantity = String(koszyk.quantity)
+                                        Text(quantity + " szt.")
+                                            .font(.caption)
+                                        let price = String(koszyk.produkt!.price * Double(koszyk.quantity))
+                                        Text(price + " zł")
                                             .font(.caption)
                                     }
                                 }
@@ -94,6 +97,13 @@ struct CartView: View {
                         .padding(8)
                     }
                 }
+                Divider()
+                
+                HStack {
+                    Image(systemName: "sum")
+                    let total = productsInCart.map({$0.produkt!.price * Double($0.quantity)}).reduce(0, +)
+                    Text(String(total) + " zł")
+                }.padding(4)
             }
             Divider()
         }

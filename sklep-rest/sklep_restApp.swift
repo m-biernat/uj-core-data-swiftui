@@ -137,6 +137,7 @@ extension sklep_restApp {
                         let server_id = item["id"] as! String
                         let desc = item["description"] as! String
                         let quantity = item["quantity"] as! Int
+                        let price = item["price"] as! Double
                         let url = item["image"] as! String
                         let kategoria_id = item["kategoria_id"] as! NSDictionary
                         let kat_id = kategoria_id["id"] as! String
@@ -154,6 +155,7 @@ extension sklep_restApp {
                         produkt.setValue(url, forKey: "image_url")
                         produkt.setValue(server_id, forKey: "server_id")
                         produkt.setValue(quantity, forKey: "quantity")
+                        produkt.setValue(price, forKey: "price")
                         produkt.setValue(kat, forKey: "kategoria")
                         
                         print("Dodano produkt: \(title) o id: \(server_id)")

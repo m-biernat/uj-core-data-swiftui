@@ -13,6 +13,7 @@
     <entity name="Produkt" representedClassName="Produkt" syncable="YES" codeGenerationType="class">
         <attribute name="desc" optional="YES" attributeType="String"/>
         <attribute name="image_url" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="server_id" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
@@ -22,6 +23,6 @@
     <elements>
         <element name="Kategoria" positionX="-54" positionY="18" width="128" height="88"/>
         <element name="Koszyk" positionX="-489" positionY="48" width="128" height="88"/>
-        <element name="Produkt" positionX="-270" positionY="18" width="128" height="148"/>
+        <element name="Produkt" positionX="-275" positionY="27" width="128" height="163"/>
     </elements>
 </model>

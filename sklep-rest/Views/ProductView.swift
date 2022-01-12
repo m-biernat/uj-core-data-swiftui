@@ -41,7 +41,7 @@ struct ProductView: View {
                         }
                         Spacer()
                         VStack() {
-                            let price = String(produkt.quantity) // Chnage to price later
+                            let price = String(produkt.price) // Chnage to price later
                             Text(price)
                                 .font(.caption)
                             Text("PLN")

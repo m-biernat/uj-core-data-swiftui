@@ -50,7 +50,7 @@ struct ProductDetailView: View {
                 Text(quantity + " szt.")
                     .padding()
                 Spacer()
-                let price = "19.99" // Have to change that later
+                let price = String(produkt.price)
                 Text(price + " zł")
                     .padding()
                 Spacer()
@@ -114,7 +114,7 @@ struct ProductDetailView: View {
                     .disabled(!removeFromCartActive || quantity == 0)
                 Spacer()
             }
-            .padding(.bottom)
+            .padding(.bottom, 8)
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear() {
