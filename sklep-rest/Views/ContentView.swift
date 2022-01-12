@@ -23,7 +23,7 @@ struct ContentView: View {
             CartView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .tabItem {
-                    Image(systemName: "arrow.up.bin.fill")
+                    Image(systemName: "cart.fill")
                     Text("Koszyk")
                 }.tag(1)
             MapView()

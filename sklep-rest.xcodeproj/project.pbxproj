@@ -10,6 +10,7 @@
 		15039BA8277A2A5800EC511A /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15039BA7277A2A5800EC511A /* RequestManager.swift */; };
 		153E1E432783D40E00DD029D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153E1E422783D40E00DD029D /* MapView.swift */; };
 		154B53A727836F9D006BE71D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B53A627836F9D006BE71D /* ContentView.swift */; };
+		1595AB4A278DBAFE0071DD3F /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */; };
 		15DF8157277912C50049BD5A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF8156277912C50049BD5A /* CartView.swift */; };
 		27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */; };
 		27326CC025B5E55200E75CF1 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBF25B5E55200E75CF1 /* CategoryView.swift */; };
@@ -24,6 +25,7 @@
 		15039BA7277A2A5800EC511A /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		153E1E422783D40E00DD029D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		154B53A627836F9D006BE71D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		15DF8156277912C50049BD5A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27326CBA25B5E55200E75CF1 /* sklep-rest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sklep-rest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sklep_restApp.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 				154B53A627836F9D006BE71D /* ContentView.swift */,
 				27326CBF25B5E55200E75CF1 /* CategoryView.swift */,
 				92AFF3DC273D6CBB007CBD4E /* ProductView.swift */,
+				1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */,
 				15DF8156277912C50049BD5A /* CartView.swift */,
 				153E1E422783D40E00DD029D /* MapView.swift */,
 			);
@@ -170,6 +173,7 @@
 				15DF8157277912C50049BD5A /* CartView.swift in Sources */,
 				27326CC725B5E56C00E75CF1 /* Persistence.swift in Sources */,
 				15039BA8277A2A5800EC511A /* RequestManager.swift in Sources */,
+				1595AB4A278DBAFE0071DD3F /* ProductDetailView.swift in Sources */,
 				27326CC025B5E55200E75CF1 /* CategoryView.swift in Sources */,
 				154B53A727836F9D006BE71D /* ContentView.swift in Sources */,
 				27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */,
@@ -308,7 +312,7 @@
 				DEVELOPMENT_TEAM = C576T7R2KX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "sklep-rest/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,7 +334,7 @@
 				DEVELOPMENT_TEAM = C576T7R2KX;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "sklep-rest/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

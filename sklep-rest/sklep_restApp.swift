@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct sklep_appData {
-    static let url = "https://bbc4-195-82-43-75.ngrok.io"
+    static let url = "https://0a7c-195-82-43-75.ngrok.io"
     static let clientID = "00000000-0000-0000-0000-000000000000"
 }
 
