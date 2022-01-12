@@ -27,70 +27,74 @@ struct CartView: View {
                     .foregroundColor(Color.gray)
                 Spacer()
             } else {
-                List(productsInCart) { koszyk in
-                    HStack{
-                        VStack(alignment: .leading) {
-                            Text(koszyk.produkt!.title!)
+                NavigationView {
+                    VStack(spacing: 0) {
+                        List(productsInCart) { koszyk in
+                            let produkt = koszyk.produkt!
+                            NavigationLink(
+                                destination: ProductDetailView(produkt: produkt)) {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(produkt.title!)
+                                            .lineLimit(1)
+                                        Spacer()
+                                        Text(produkt.desc!)
+                                            .font(.caption)
+                                            .lineLimit(1)
+                                    }
+                                    Spacer()
+                                    VStack() {
+                                        let price = String(koszyk.quantity) // Chnage to price later
+                                        Text(price + " szt.")
+                                            .font(.caption)
+                                    }
+                                }
+                            }
+                            .padding(.vertical, 8)
+                        }
+                        .navigationBarTitle("Koszyk", displayMode: .inline)
+                        .navigationBarHidden(true)
+                
+                        Divider()
+                        
+                        HStack() {
                             Spacer()
-                            Text(koszyk.produkt!.desc!)
-                                .font(.caption)
-                                .lineLimit(1)
+                            
+                            Button(
+                                action: {
+                                    print("platnosc")
+                                },
+                                label: {
+                                    Image(systemName: "dollarsign.square.fill")
+                                        .font(.title2)
+                                    Text("Płatność")
+                                })
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(5)
+                                        
+                            Button(
+                                action: {
+                                    removeCart() { () in
+                                        
+                                    }
+                                },
+                                label: {
+                                    Image(systemName: "bin.xmark")
+                                        .font(.title2)
+                                })
+                                .padding()
+                                .background(Color.red)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(5)
+                            
+                            Spacer()
                         }
-                        Spacer()
-                        let quantity = String(koszyk.quantity)
-                        Text(quantity + " szt.")
-                            .font(.caption)
-                        Button(action: {
-                            removeFromCart(koszyk: koszyk) { () in
-                                
-                            }
-                        }) {
-                            Image(systemName: "bin.xmark")
-                                .foregroundColor(Color.red)
-                        }
+                        .padding(8)
                     }
-                    .padding(.vertical, 8)
                 }
-                
-                Divider()
-                
-                HStack() {
-                    Spacer()
-                    
-                    Button(
-                        action: {
-                            print("platnosc")
-                        },
-                        label: {
-                            Image(systemName: "dollarsign.square.fill")
-                                .font(.title2)
-                            Text("Płatność")
-                        })
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(5)
-                                
-                    Button(
-                        action: {
-                            removeCart() { () in
-                                
-                            }
-                        },
-                        label: {
-                            Image(systemName: "bin.xmark")
-                                .font(.title2)
-                        })
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(5)
-                    
-                    Spacer()
-                }
-                .padding(8)
             }
-            
             Divider()
         }
     }

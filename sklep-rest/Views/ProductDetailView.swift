@@ -13,11 +13,10 @@ struct ProductDetailView: View {
     
     var produkt: Produkt
     
-    @State var quantity: Int
+    @State private var quantity = 0
     
     @State private var addToCartActive = true
     @State private var removeFromCartActive = true
-    
     
     var body: some View {
         VStack(spacing: 0) {
@@ -118,6 +117,9 @@ struct ProductDetailView: View {
             .padding(.bottom)
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear() {
+            quantity = Int(produkt.koszyk?.quantity ?? 0)
+        }
     }
 }
 
@@ -126,7 +128,7 @@ struct ProductDetailView_Previews: PreviewProvider {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Produkt")
         let prod = try! PersistenceController.preview.container.viewContext.fetch(request).first as! Produkt
         
-        ProductDetailView(produkt: prod, quantity: Int(prod.koszyk?.quantity ?? 0))
+        ProductDetailView(produkt: prod)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

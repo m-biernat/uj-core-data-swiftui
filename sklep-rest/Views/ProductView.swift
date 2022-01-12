@@ -29,7 +29,7 @@ struct ProductView: View {
     var body: some View {
         List(sample()) { produkt in
                 NavigationLink(
-                    destination: ProductDetailView(produkt: produkt, quantity: Int(produkt.koszyk?.quantity ?? 0))) {
+                    destination: ProductDetailView(produkt: produkt)) {
                     HStack {
                         VStack(alignment: .leading) {
                             Text(produkt.title!)
