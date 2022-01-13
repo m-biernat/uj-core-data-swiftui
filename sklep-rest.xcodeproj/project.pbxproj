@@ -3,13 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		15039BA8277A2A5800EC511A /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15039BA7277A2A5800EC511A /* RequestManager.swift */; };
 		153E1E432783D40E00DD029D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153E1E422783D40E00DD029D /* MapView.swift */; };
 		154B53A727836F9D006BE71D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B53A627836F9D006BE71D /* ContentView.swift */; };
+		159224A7278FA4F9007F3B8A /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 159224A6278FA4F9007F3B8A /* Auth0.plist */; };
+		159224AA278FA670007F3B8A /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 159224A9278FA670007F3B8A /* Auth0 */; };
 		1595AB4A278DBAFE0071DD3F /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */; };
 		15DF8157277912C50049BD5A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF8156277912C50049BD5A /* CartView.swift */; };
 		27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */; };
@@ -25,6 +27,7 @@
 		15039BA7277A2A5800EC511A /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		153E1E422783D40E00DD029D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		154B53A627836F9D006BE71D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		159224A6278FA4F9007F3B8A /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		15DF8156277912C50049BD5A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27326CBA25B5E55200E75CF1 /* sklep-rest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sklep-rest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				159224AA278FA670007F3B8A /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,8 +90,9 @@
 				27326CC625B5E56C00E75CF1 /* Persistence.swift */,
 				154B53A8278370E6006BE71D /* Views */,
 				15039BA7277A2A5800EC511A /* RequestManager.swift */,
-				27326CC125B5E56C00E75CF1 /* Assets.xcassets */,
 				27326CCB25B5E56C00E75CF1 /* Info.plist */,
+				159224A6278FA4F9007F3B8A /* Auth0.plist */,
+				27326CC125B5E56C00E75CF1 /* Assets.xcassets */,
 				27326CC325B5E56C00E75CF1 /* Preview Content */,
 			);
 			path = "sklep-rest";
@@ -117,6 +122,9 @@
 			dependencies = (
 			);
 			name = "sklep-rest";
+			packageProductDependencies = (
+				159224A9278FA670007F3B8A /* Auth0 */,
+			);
 			productName = "sklep-rest";
 			productReference = 27326CBA25B5E55200E75CF1 /* sklep-rest.app */;
 			productType = "com.apple.product-type.application";
@@ -144,6 +152,9 @@
 				Base,
 			);
 			mainGroup = 27326CB125B5E55100E75CF1;
+			packageReferences = (
+				159224A8278FA670007F3B8A /* XCRemoteSwiftPackageReference "Auth0.swift" */,
+			);
 			productRefGroup = 27326CBB25B5E55200E75CF1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -159,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27326CC525B5E56C00E75CF1 /* Preview Assets.xcassets in Resources */,
+				159224A7278FA4F9007F3B8A /* Auth0.plist in Resources */,
 				27326CC225B5E56C00E75CF1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +380,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		159224A8278FA670007F3B8A /* XCRemoteSwiftPackageReference "Auth0.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		159224A9278FA670007F3B8A /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 159224A8278FA670007F3B8A /* XCRemoteSwiftPackageReference "Auth0.swift" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		27326CC825B5E56C00E75CF1 /* sklep_rest.xcdatamodeld */ = {
