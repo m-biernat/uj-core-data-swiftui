@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Auth0
+import CryptoKit
 
 class UserAuth: ObservableObject {
     static let shared = UserAuth()
@@ -57,7 +58,7 @@ class UserAuth: ObservableObject {
                     // You've got the user's profile, good time to store it locally.
                     // e.g. self.profile = profile
                     self.profile = profile
-                    print(profile.email ?? "ERR")
+                    self.setClientID()
                 case .failure(let error):
                     // Handle the error
                     print("Error: \(error)")
@@ -65,10 +66,20 @@ class UserAuth: ObservableObject {
             }
     }
     
+    private func setClientID() {
+        let hash = Insecure.MD5.hash(data: profile!.sub.data(using: .utf8)!)
+        var hashStr = hash.compactMap { String(format: "%02X", $0) }.joined()
+        hashStr.insert("-", at: hashStr.index(hashStr.startIndex, offsetBy: 8))
+        hashStr.insert("-", at: hashStr.index(hashStr.startIndex, offsetBy: 13))
+        hashStr.insert("-", at: hashStr.index(hashStr.startIndex, offsetBy: 18))
+        hashStr.insert("-", at: hashStr.index(hashStr.startIndex, offsetBy: 23))
+        sklep_appData.clientID = hashStr
+    }
+    
     func login() {
         Auth0
             .webAuth()
-            .scope("openid profile offline_access")
+            .scope("openid profile email offline_access")
             .audience("https://dev-uzmorrli.us.auth0.com/userinfo")
             .useEphemeralSession()
             .start { result in

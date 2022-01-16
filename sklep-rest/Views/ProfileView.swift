@@ -6,13 +6,62 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ProfileView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    let userAuth = UserAuth.shared
+    
     var body: some View {
-        VStack {
-            Spacer()
-            Button(action: { UserAuth.shared.logout() }, label: { Text("Wyloguj się") })
-            Spacer()
+        VStack(spacing: 0) {
+            NavigationView {
+                VStack(spacing: 0) {
+                    Spacer()
+                    AsyncImage(url: userAuth.profile?.picture) { image in
+                               image
+                                   .resizable()
+                                   .aspectRatio(contentMode: .fit)
+                           } placeholder: {
+                               Image(systemName: "photo")
+                                   .imageScale(.large)
+                                   .foregroundColor(.gray)
+                           }
+                           .frame(width: 150, height: 150)
+                           .cornerRadius(100)
+                           .padding()
+                    
+                    Text("\(userAuth.profile?.email ?? "name@domain.com")")
+                    Spacer()
+                    Button(
+                        action: {
+                            removeLocalCart()
+                            userAuth.logout()
+                        },
+                        label: {
+                            Text("Wyloguj się")
+                        })
+                        .padding()
+                        .foregroundColor(Color.red)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.red, lineWidth: 1))
+                        .disabled(!userAuth.isLoggedIn)
+                    Spacer()
+                    
+                    NavigationLink(destination: {}) {
+                        Text("Zamówienia")
+                    }
+                    .padding()
+                    .foregroundColor(Color.white)
+                    .background(Color.accentColor)
+                    .cornerRadius(5)
+                    
+                    Spacer()
+                }
+                .navigationBarTitle("Konto", displayMode: .inline)
+                .navigationBarHidden(true)
+            }
             Divider()
         }
     }
@@ -21,5 +70,19 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
+    }
+}
+
+extension ProfileView {
+    func removeLocalCart() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Koszyk")
+        
+        let objects = try? viewContext.fetch(fetchRequest) as? [Koszyk]
+        
+        objects?.forEach { koszyk in
+            viewContext.delete(koszyk)
+        }
+        
+        try! viewContext.save()
     }
 }

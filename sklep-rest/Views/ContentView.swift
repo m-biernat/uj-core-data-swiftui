@@ -37,7 +37,7 @@ struct ContentView: View {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .tabItem {
                     Image(systemName: "person.crop.circle")
-                    Text("Profil")
+                    Text("Konto")
                 }.tag(2)
             MapView()
                 .tabItem {
