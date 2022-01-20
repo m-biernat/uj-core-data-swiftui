@@ -137,22 +137,29 @@ extension ProductDetailView {
     func addToCart(completion: @escaping () -> Void) {
         if(!checkIfExists(model: "Koszyk", field: "produkt.server_id", fieldValue: produkt.server_id!))
         {
-            let postData = RequestManager.PostKoszykDataModel(
+            let postData = PostRequestData.KoszykModel(
                 client_id: sklep_appData.clientID,
                 quantity: 1,
-                produkt_id: RequestManager.Produkt(
+                produkt_id: RequestData.Produkt(
                     id: produkt.server_id!
                 )
             )
             
-            RequestManager.sendDataRequest(data: postData) { (result) -> () in
+            RequestManager.sendDataRequest(data: postData,
+                                           postfix: "/koszyk/") { (result: RequestData.KoszykModel) -> () in
                 let koszykEntity = NSEntityDescription.entity(forEntityName: "Koszyk", in: viewContext)
                 
                 let koszyk = NSManagedObject(entity: koszykEntity!, insertInto: viewContext)
                 
-                koszyk.setValue(result.id, forKey: "server_id")
-                koszyk.setValue(result.quantity, forKey: "quantity")
-                koszyk.setValue(produkt, forKey: "produkt")
+                koszyk.setValuesForKeys([
+                    "server_id": result.id,
+                    "quantity": result.quantity,
+                    "produkt": produkt
+                ])
+                
+                //koszyk.setValue(result.id, forKey: "server_id")
+                //koszyk.setValue(result.quantity, forKey: "quantity")
+                //koszyk.setValue(produkt, forKey: "produkt")
             
                 try! viewContext.save()
                 completion()
@@ -167,10 +174,10 @@ extension ProductDetailView {
         var quantity = Int(koszyk.quantity)
         quantity += 1
         
-        let updateData = RequestManager.KoszykDataModel(
+        let updateData = RequestData.KoszykModel(
             client_id: sklep_appData.clientID,
             quantity: quantity,
-            produkt_id: RequestManager.Produkt(
+            produkt_id: RequestData.Produkt(
                 id: produkt.server_id!
             ),
             id: koszyk.server_id!
@@ -178,7 +185,7 @@ extension ProductDetailView {
         
         RequestManager.sendDataRequest(data: updateData,
                                        method: "PUT",
-                                       postfix: "produkt/" + koszyk.server_id!) { (result) -> () in
+                                       postfix: "/koszyk/produkt/" + koszyk.server_id!) { (result: RequestData.KoszykModel) -> () in
             koszyk.quantity = Int16(result.quantity)
             
             try! viewContext.save()
@@ -208,10 +215,10 @@ extension ProductDetailView {
         quantity -= 1
         
         if (quantity > 0) {
-            let updateData = RequestManager.KoszykDataModel(
+            let updateData = RequestData.KoszykModel(
                 client_id: sklep_appData.clientID,
                 quantity: quantity,
-                produkt_id: RequestManager.Produkt(
+                produkt_id: RequestData.Produkt(
                     id: produkt.server_id!
                 ),
                 id: koszyk.server_id!
@@ -219,7 +226,7 @@ extension ProductDetailView {
             
             RequestManager.sendDataRequest(data: updateData,
                                            method: "PUT",
-                                           postfix: "produkt/" + koszyk.server_id!) { (result) -> () in
+                                           postfix: "/koszyk/produkt/" + koszyk.server_id!) { (result: RequestData.KoszykModel) -> () in
                 koszyk.quantity = Int16(result.quantity)
                 
                 try! viewContext.save()
@@ -227,7 +234,7 @@ extension ProductDetailView {
             }
             
         } else {
-            RequestManager.removeDataRequest(postfix: "produkt/" + koszyk.server_id!) { () -> () in
+            RequestManager.removeDataRequest(postfix: "/koszyk/produkt/" + koszyk.server_id!) { () -> () in
                 viewContext.delete(koszyk)
                 
                 try! viewContext.save()

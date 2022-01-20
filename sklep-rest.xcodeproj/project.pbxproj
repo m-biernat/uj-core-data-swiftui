@@ -16,6 +16,7 @@
 		159224A7278FA4F9007F3B8A /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 159224A6278FA4F9007F3B8A /* Auth0.plist */; };
 		159224AA278FA670007F3B8A /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 159224A9278FA670007F3B8A /* Auth0 */; };
 		1595AB4A278DBAFE0071DD3F /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */; };
+		15B82A312798C87F0096C4F3 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B82A302798C87F0096C4F3 /* RequestData.swift */; };
 		15DF8157277912C50049BD5A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF8156277912C50049BD5A /* CartView.swift */; };
 		27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */; };
 		27326CC025B5E55200E75CF1 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBF25B5E55200E75CF1 /* CategoryView.swift */; };
@@ -35,6 +36,7 @@
 		1571118C279380E1004C574C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		159224A6278FA4F9007F3B8A /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		15B82A302798C87F0096C4F3 /* RequestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestData.swift; sourceTree = "<group>"; };
 		15DF8156277912C50049BD5A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		27326CBA25B5E55200E75CF1 /* sklep-rest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sklep-rest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sklep_restApp.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				154B53A8278370E6006BE71D /* Views */,
 				157111882793730D004C574C /* UserAuth.swift */,
 				15039BA7277A2A5800EC511A /* RequestManager.swift */,
+				15B82A302798C87F0096C4F3 /* RequestData.swift */,
 				27326CCB25B5E56C00E75CF1 /* Info.plist */,
 				159224A6278FA4F9007F3B8A /* Auth0.plist */,
 				27326CC125B5E56C00E75CF1 /* Assets.xcassets */,
@@ -202,6 +205,7 @@
 				27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */,
 				92AFF3DD273D6CBB007CBD4E /* ProductView.swift in Sources */,
 				153E1E432783D40E00DD029D /* MapView.swift in Sources */,
+				15B82A312798C87F0096C4F3 /* RequestData.swift in Sources */,
 				157111892793730D004C574C /* UserAuth.swift in Sources */,
 				27326CCA25B5E56C00E75CF1 /* sklep_rest.xcdatamodeld in Sources */,
 			);

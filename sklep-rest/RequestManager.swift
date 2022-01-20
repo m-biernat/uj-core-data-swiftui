@@ -8,30 +8,13 @@
 import CoreData
 
 struct RequestManager {
-    
-    struct KoszykDataModel: Codable {
-        let client_id: String
-        let quantity: Int
-        let produkt_id: Produkt
-        let id: String
-    }
-    struct PostKoszykDataModel: Codable {
-        let client_id: String
-        let quantity: Int
-        let produkt_id: Produkt
-    }
-    
-    struct Produkt: Codable {
-        let id: String
-    }
-    
-    static func sendDataRequest<T: Codable>(data: T,
-                                            method: String = "POST",
-                                            postfix: String = "",
-                                            completion: @escaping (KoszykDataModel) -> Void) {
+    static func sendDataRequest<T1: Codable, T2: Codable>(data: T1,
+                                                            method: String = "POST",
+                                                            postfix: String = "",
+                                                            completion: @escaping (T2) -> Void) {
         let jsonData = try? JSONEncoder().encode(data)
         
-        let url = URL(string: sklep_appData.url + "/koszyk/" + postfix)
+        let url = URL(string: sklep_appData.url + postfix)
        
         var request = URLRequest(url: url!)
         request.httpMethod = method
@@ -55,11 +38,11 @@ struct RequestManager {
             }
             
             do {
-                let incomingData = try JSONDecoder().decode(KoszykDataModel.self, from: data!)
+                let incomingData = try JSONDecoder().decode(T2.self, from: data!)
                 completion(incomingData)
                 
             } catch {
-                print("Koszyk - Problem z wyslaniem danych")
+                print("Problem z wyslaniem danych \(postfix)")
                 return
             }
         })
@@ -67,12 +50,10 @@ struct RequestManager {
     }
     
     static func removeDataRequest(postfix: String, completion: @escaping () -> Void) {
-        let url = URL(string: sklep_appData.url + "/koszyk/" + postfix)
+        let url = URL(string: sklep_appData.url + postfix)
        
         var request = URLRequest(url: url!)
         request.httpMethod = "DELETE"
-        //request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        //request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)

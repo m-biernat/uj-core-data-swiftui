@@ -20,9 +20,26 @@
         <relationship name="kategoria" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Kategoria" inverseName="produkt" inverseEntity="Kategoria"/>
         <relationship name="koszyk" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Koszyk" inverseName="produkt" inverseEntity="Koszyk"/>
     </entity>
+    <entity name="Zamowienie" representedClassName="Zamowienie" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="paid" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="server_id" optional="YES" attributeType="String"/>
+        <relationship name="zamowienieProdukt" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ZamowienieProdukt" inverseName="zamowienie" inverseEntity="ZamowienieProdukt"/>
+    </entity>
+    <entity name="ZamowienieProdukt" representedClassName="ZamowienieProdukt" syncable="YES" codeGenerationType="class">
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="produkt_id" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="server_id" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="zamowienie" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Zamowienie" inverseName="zamowienieProdukt" inverseEntity="Zamowienie"/>
+    </entity>
     <elements>
         <element name="Kategoria" positionX="-54" positionY="18" width="128" height="88"/>
         <element name="Koszyk" positionX="-489" positionY="48" width="128" height="88"/>
         <element name="Produkt" positionX="-275" positionY="27" width="128" height="163"/>
+        <element name="Zamowienie" positionX="-57" positionY="151" width="128" height="118"/>
+        <element name="ZamowienieProdukt" positionX="-271" positionY="218" width="128" height="133"/>
     </elements>
 </model>

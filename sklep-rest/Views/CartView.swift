@@ -65,23 +65,27 @@ struct CartView: View {
                             
                             Button(
                                 action: {
-                                    print("platnosc")
+                                    makeOrder(totalCost: calculateTotalCost()) { zamowienie in
+                                        fillOrder(zamowienie: zamowienie) {
+                                            //removeCart() { }
+                                            
+                                            print("Dzialuje")
+                                        }
+                                    }
                                 },
                                 label: {
-                                    Image(systemName: "dollarsign.square.fill")
+                                    Image(systemName: "barcode")
                                         .font(.title2)
-                                    Text("Płatność")
+                                    Text("Zamów")
                                 })
                                 .padding()
-                                .background(Color.green)
+                                .background(Color.accentColor)
                                 .foregroundColor(Color.white)
                                 .cornerRadius(5)
                                         
                             Button(
                                 action: {
-                                    removeCart() { () in
-                                        
-                                    }
+                                    removeCart() { }
                                 },
                                 label: {
                                     Image(systemName: "bin.xmark")
@@ -101,7 +105,7 @@ struct CartView: View {
                 
                 HStack {
                     Image(systemName: "sum")
-                    let total = productsInCart.map({$0.produkt!.price * Double($0.quantity)}).reduce(0, +)
+                    let total = calculateTotalCost()
                     Text(String(total) + " zł")
                 }.padding(4)
             }
@@ -117,41 +121,12 @@ struct CartView_Previews: PreviewProvider {
 }
 
 extension CartView {
-    func removeFromCart(koszyk: Koszyk, completion: @escaping () -> Void) {
-        var quantity = Int(koszyk.quantity)
-        quantity -= 1
-        
-        if (quantity > 0) {
-            let updateData = RequestManager.KoszykDataModel(
-                client_id: sklep_appData.clientID,
-                quantity: quantity,
-                produkt_id: RequestManager.Produkt(
-                    id: koszyk.produkt!.server_id!
-                ),
-                id: koszyk.server_id!
-            )
-            
-            RequestManager.sendDataRequest(data: updateData,
-                                           method: "PUT",
-                                           postfix: "produkt/" + koszyk.server_id!) { (result) -> () in
-                koszyk.quantity = Int16(result.quantity)
-                
-                try! viewContext.save()
-                completion()
-            }
-            
-        } else {
-            RequestManager.removeDataRequest(postfix: "produkt/" + koszyk.server_id!) { () -> () in
-                viewContext.delete(koszyk)
-                
-                try! viewContext.save()
-                completion()
-            }
-        }
+    func calculateTotalCost() -> Double {
+        return productsInCart.map({$0.produkt!.price * Double($0.quantity)}).reduce(0, +)
     }
     
     func removeCart(completion: @escaping () -> Void) {
-        RequestManager.removeDataRequest(postfix: sklep_appData.clientID) { () -> () in
+        RequestManager.removeDataRequest(postfix: "/koszyk/" + sklep_appData.clientID) { () -> () in
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Koszyk")
             
             let objects = try? viewContext.fetch(fetchRequest) as? [Koszyk]
@@ -161,6 +136,74 @@ extension CartView {
             }
             
             try! viewContext.save()
+            completion()
+        }
+    }
+    
+    func makeOrder(totalCost: Double, completion: @escaping (Zamowienie) -> Void) {
+        let postData = PostRequestData.ZamowienieModel(
+            client_id: sklep_appData.clientID,
+            price: totalCost,
+            date: DateFormatter().string(from: Date()),
+            paid: false
+        )
+        
+        RequestManager.sendDataRequest(data: postData,
+                                       postfix: "/zamowienie/") { (result: RequestData.ZamowienieModel) -> () in
+            let zamowienieEntity = NSEntityDescription.entity(forEntityName: "Zamowienie", in: viewContext)
+            
+            let zamowienie = NSManagedObject(entity: zamowienieEntity!, insertInto: viewContext)
+            
+            zamowienie.setValuesForKeys([
+                "server_id": result.id,
+                "price": result.price,
+                "date": DateFormatter().date(from: result.date)!,
+                "paid": result.paid
+            ])
+            
+            //zamowienie.setValue(result.id, forKey: "server_id")
+            //zamowienie.setValue(result.price, forKey: "price")
+            //zamowienie.setValue(DateFormatter().date(from: result.date), forKey: "date")
+            //zamowienie.setValue(result.paid, forKey: "paid")
+        
+            //try! viewContext.save()
+            completion(zamowienie as! Zamowienie)
+        }
+    }
+    
+    func fillOrder(zamowienie: Zamowienie, completion: @escaping () -> Void) {
+        var postData: [PostRequestData.ZamowienieProduktModel] = []
+        
+        productsInCart.forEach { productInCart in
+            postData.append(PostRequestData.ZamowienieProduktModel(
+                produkt_id: productInCart.produkt!.server_id!,
+                title: productInCart.produkt!.title!,
+                quantity: Int(productInCart.quantity),
+                price: productInCart.produkt!.price * Double(productInCart.quantity),
+                zamowienie_id: RequestData.Zamowienie(
+                    id: zamowienie.server_id!
+                )
+            ))
+        }
+        
+        RequestManager.sendDataRequest(data: postData,
+                                       postfix: "/zamowienie/produkt/") { (result: [RequestData.ZamowienieProduktModel]) -> () in
+            let zamowienieProduktEntity = NSEntityDescription.entity(forEntityName: "ZamowienieProdukt", in: viewContext)
+            
+            result.forEach { item in
+                let zamowienieProdukt = NSManagedObject(entity: zamowienieProduktEntity!, insertInto: viewContext)
+
+                zamowienieProdukt.setValuesForKeys([
+                    "server_id": item.id,
+                    "produkt_id": item.produkt_id,
+                    "title": item.title,
+                    "quantity": item.quantity,
+                    "price": item.price,
+                    "zamowienie": zamowienie
+                ])
+            }
+        
+            //try! viewContext.save()
             completion()
         }
     }
