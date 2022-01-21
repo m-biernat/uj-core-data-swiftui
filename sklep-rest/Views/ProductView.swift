@@ -13,21 +13,8 @@ struct ProductView: View {
 
     var kategoria: Kategoria
     
-    func sample() -> [Produkt] {
-        let predicate = NSPredicate(format: "kategoria == %@", kategoria)
-        let productsRequest = NSFetchRequest<Produkt>(entityName: "Produkt")
-        productsRequest.predicate = predicate
-        do {
-            let results = try self.viewContext.fetch(productsRequest);
-            return results
-        } catch {
-            print("Nie bangla")
-        }
-        return []
-    }
-    
     var body: some View {
-        List(sample()) { produkt in
+        List(getProductsFromCategory()) { produkt in
                 NavigationLink(
                     destination: ProductDetailView(produkt: produkt)) {
                     HStack {
@@ -41,7 +28,7 @@ struct ProductView: View {
                         }
                         Spacer()
                         VStack() {
-                            let price = String(produkt.price) // Chnage to price later
+                            let price = String(produkt.price)
                             Text(price)
                                 .font(.caption)
                             Text("PLN")
@@ -62,5 +49,20 @@ struct ProductView_Previews: PreviewProvider {
         let kat = try! PersistenceController.preview.container.viewContext.fetch(request).first as! Kategoria
         
         ProductView(kategoria: kat).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
+}
+
+extension ProductView {
+    func getProductsFromCategory() -> [Produkt] {
+        let predicate = NSPredicate(format: "kategoria == %@", kategoria)
+        let productsRequest = NSFetchRequest<Produkt>(entityName: "Produkt")
+        productsRequest.predicate = predicate
+        do {
+            let results = try self.viewContext.fetch(productsRequest);
+            return results
+        } catch {
+            print("Nie bangla")
+        }
+        return []
     }
 }

@@ -17,6 +17,8 @@ struct CartView: View {
     
     private var productsInCart: FetchedResults<Koszyk>
     
+    @State private var actionPerformed = false;
+    
     var body: some View {
         let isCartEmpty = productsInCart.count < 1
         
@@ -26,88 +28,102 @@ struct CartView: View {
                 Text("Koszyk jest pusty")
                     .foregroundColor(Color.gray)
                 Spacer()
-            } else {
-                NavigationView {
-                    VStack(spacing: 0) {
-                        List(productsInCart) { koszyk in
-                            let produkt = koszyk.produkt!
-                            NavigationLink(
-                                destination: ProductDetailView(produkt: produkt)) {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text(produkt.title!)
-                                            .lineLimit(1)
+            }
+            else {
+                if actionPerformed {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
+                }
+                else {
+                    NavigationView {
+                        VStack(spacing: 0) {
+                            List(productsInCart) { koszyk in
+                                let produkt = koszyk.produkt!
+                                NavigationLink(
+                                    destination: ProductDetailView(produkt: produkt)) {
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text(produkt.title!)
+                                                .lineLimit(1)
+                                            Spacer()
+                                            Text(produkt.desc!)
+                                                .font(.caption)
+                                                .lineLimit(1)
+                                        }
                                         Spacer()
-                                        Text(produkt.desc!)
-                                            .font(.caption)
-                                            .lineLimit(1)
-                                    }
-                                    Spacer()
-                                    VStack() {
-                                        let quantity = String(koszyk.quantity)
-                                        Text(quantity + " szt.")
-                                            .font(.caption)
-                                        let price = String(koszyk.produkt!.price * Double(koszyk.quantity))
-                                        Text(price + " zł")
-                                            .font(.caption)
-                                    }
-                                }
-                            }
-                            .padding(.vertical, 8)
-                        }
-                        .navigationBarTitle("Koszyk", displayMode: .inline)
-                        .navigationBarHidden(true)
-                
-                        Divider()
-                        
-                        HStack() {
-                            Spacer()
-                            
-                            Button(
-                                action: {
-                                    makeOrder(totalCost: calculateTotalCost()) { zamowienie in
-                                        fillOrder(zamowienie: zamowienie) {
-                                            //removeCart() { }
-                                            
-                                            print("Dzialuje")
+                                        VStack() {
+                                            let quantity = String(koszyk.quantity)
+                                            Text(quantity + " szt.")
+                                                .font(.caption)
+                                            let price = String(calculatePrice(koszyk.produkt!.price, koszyk.quantity))
+                                            Text(price + " zł")
+                                                .font(.caption)
                                         }
                                     }
-                                },
-                                label: {
-                                    Image(systemName: "barcode")
-                                        .font(.title2)
-                                    Text("Zamów")
-                                })
-                                .padding()
-                                .background(Color.accentColor)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(5)
-                                        
-                            Button(
-                                action: {
-                                    removeCart() { }
-                                },
-                                label: {
-                                    Image(systemName: "bin.xmark")
-                                        .font(.title2)
-                                })
-                                .padding()
-                                .background(Color.red)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(5)
+                                }
+                                .padding(.vertical, 8)
+                            }
+                            .navigationBarTitle("Koszyk", displayMode: .inline)
+                            .navigationBarHidden(true)
+                    
+                            Divider()
                             
-                            Spacer()
+                            HStack() {
+                                Spacer()
+                                
+                                Button(
+                                    action: {
+                                        actionPerformed = true
+                                        makeOrder(totalCost: calculateTotalCost()) { zamowienie in
+                                            fillOrder(zamowienie) {
+                                                removeCart() {
+                                                    actionPerformed = false
+                                                }
+                                            }
+                                        }
+                                    },
+                                    label: {
+                                        Image(systemName: "barcode")
+                                            .font(.title2)
+                                        Text("Zamów")
+                                    })
+                                    .padding()
+                                    .background(Color.green)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(5)
+                                    .disabled(actionPerformed)
+                                
+                                Button(
+                                    action: {
+                                        actionPerformed = true
+                                        removeCart() {
+                                            actionPerformed = false
+                                        }
+                                    },
+                                    label: {
+                                        Image(systemName: "bin.xmark")
+                                            .font(.title2)
+                                    })
+                                    .padding()
+                                    .background(Color.red)
+                                    .foregroundColor(Color.white)
+                                    .cornerRadius(5)
+                                    .disabled(actionPerformed)
+                                
+                                Spacer()
+                            }
+                            .padding(8)
                         }
-                        .padding(8)
                     }
+                    Divider()
+                    
+                    HStack {
+                        Image(systemName: "sum")
+                        let total = calculateTotalCost()
+                        Text(String(total) + " zł")
+                    }.padding(4)
                 }
-                Divider()
-                
-                HStack {
-                    Image(systemName: "sum")
-                    let total = calculateTotalCost()
-                    Text(String(total) + " zł")
-                }.padding(4)
             }
             Divider()
         }
@@ -122,20 +138,20 @@ struct CartView_Previews: PreviewProvider {
 
 extension CartView {
     func calculateTotalCost() -> Double {
-        return productsInCart.map({$0.produkt!.price * Double($0.quantity)}).reduce(0, +)
+        let result = productsInCart.map({$0.produkt!.price * Double($0.quantity)}).reduce(0, +)
+        return Double(round(100 * result) / 100)
+    }
+    
+    func calculatePrice(_ price: Double, _ quantity: Int16) -> Double {
+        let result = price * Double(quantity)
+        return Double(round(100 * result) / 100)
     }
     
     func removeCart(completion: @escaping () -> Void) {
-        RequestManager.removeDataRequest(postfix: "/koszyk/" + sklep_appData.clientID) { () -> () in
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Koszyk")
+        RequestManager.removeDataRequest(postfix: "/koszyk/" + sklep_appData.clientID) {
             
-            let objects = try? viewContext.fetch(fetchRequest) as? [Koszyk]
+            Koszyk.removeAll(viewContext)
             
-            objects?.forEach { koszyk in
-                viewContext.delete(koszyk)
-            }
-            
-            try! viewContext.save()
             completion()
         }
     }
@@ -144,9 +160,11 @@ extension CartView {
         let postData = PostRequestData.ZamowienieModel(
             client_id: sklep_appData.clientID,
             price: totalCost,
-            date: DateFormatter().string(from: Date()),
+            date: Date.now.formatted(.iso8601),
             paid: false
         )
+        
+        print("Send \(postData.date)")
         
         RequestManager.sendDataRequest(data: postData,
                                        postfix: "/zamowienie/") { (result: RequestData.ZamowienieModel) -> () in
@@ -157,21 +175,18 @@ extension CartView {
             zamowienie.setValuesForKeys([
                 "server_id": result.id,
                 "price": result.price,
-                "date": DateFormatter().date(from: result.date)!,
+                "date": ISO8601DateFormatter().date(from: result.date)!,
                 "paid": result.paid
             ])
             
-            //zamowienie.setValue(result.id, forKey: "server_id")
-            //zamowienie.setValue(result.price, forKey: "price")
-            //zamowienie.setValue(DateFormatter().date(from: result.date), forKey: "date")
-            //zamowienie.setValue(result.paid, forKey: "paid")
+            print(result.date)
         
-            //try! viewContext.save()
+            try! viewContext.save()
             completion(zamowienie as! Zamowienie)
         }
     }
     
-    func fillOrder(zamowienie: Zamowienie, completion: @escaping () -> Void) {
+    func fillOrder(_ zamowienie: Zamowienie, completion: @escaping () -> Void) {
         var postData: [PostRequestData.ZamowienieProduktModel] = []
         
         productsInCart.forEach { productInCart in
@@ -179,7 +194,7 @@ extension CartView {
                 produkt_id: productInCart.produkt!.server_id!,
                 title: productInCart.produkt!.title!,
                 quantity: Int(productInCart.quantity),
-                price: productInCart.produkt!.price * Double(productInCart.quantity),
+                price: calculatePrice(productInCart.produkt!.price, productInCart.quantity),
                 zamowienie_id: RequestData.Zamowienie(
                     id: zamowienie.server_id!
                 )
@@ -203,7 +218,7 @@ extension CartView {
                 ])
             }
         
-            //try! viewContext.save()
+            try! viewContext.save()
             completion()
         }
     }

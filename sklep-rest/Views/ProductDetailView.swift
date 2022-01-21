@@ -157,10 +157,6 @@ extension ProductDetailView {
                     "produkt": produkt
                 ])
                 
-                //koszyk.setValue(result.id, forKey: "server_id")
-                //koszyk.setValue(result.quantity, forKey: "quantity")
-                //koszyk.setValue(produkt, forKey: "produkt")
-            
                 try! viewContext.save()
                 completion()
             }

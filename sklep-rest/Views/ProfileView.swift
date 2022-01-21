@@ -35,7 +35,9 @@ struct ProfileView: View {
                     Spacer()
                     Button(
                         action: {
-                            removeLocalCart()
+                            Koszyk.removeAll(viewContext)
+                            Zamowienie.removeAll(viewContext)
+                            ZamowienieProdukt.removeAll(viewContext)
                             userAuth.logout()
                         },
                         label: {
@@ -49,7 +51,9 @@ struct ProfileView: View {
                         .disabled(!userAuth.isLoggedIn)
                     Spacer()
                     
-                    NavigationLink(destination: {}) {
+                    NavigationLink(destination: {
+                        OrderListView().environment(\.managedObjectContext, viewContext)
+                    }) {
                         Text("Zamówienia")
                     }
                     .padding()
@@ -70,19 +74,5 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
-    }
-}
-
-extension ProfileView {
-    func removeLocalCart() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Koszyk")
-        
-        let objects = try? viewContext.fetch(fetchRequest) as? [Koszyk]
-        
-        objects?.forEach { koszyk in
-            viewContext.delete(koszyk)
-        }
-        
-        try! viewContext.save()
     }
 }
