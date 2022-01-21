@@ -79,4 +79,41 @@ struct RequestManager {
         })
         task.resume()
     }
+    
+    static func getDataRequest<T: Codable>(postfix: String,
+                                           failure: @escaping() -> Void,
+                                           completion: @escaping(T) -> Void) {
+        let url = URL(string: sklep_appData.url + postfix)
+    
+        let request = URLRequest(url: url!)
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            
+            guard error == nil else {
+                print("Houston mamy problem")
+                failure()
+                return
+            }
+            
+            guard data != nil else {
+                print("Nie ma danych")
+                failure()
+                return
+            }
+            
+            do {
+                let incomingData = try JSONDecoder().decode(T.self, from: data!)
+                completion(incomingData)
+                
+            } catch {
+                print("Problem z pobraniem danych \(postfix)")
+                failure()
+                return
+            }
+        })
+        task.resume()
+    }
 }

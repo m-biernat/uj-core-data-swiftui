@@ -164,8 +164,6 @@ extension CartView {
             paid: false
         )
         
-        print("Send \(postData.date)")
-        
         RequestManager.sendDataRequest(data: postData,
                                        postfix: "/zamowienie/") { (result: RequestData.ZamowienieModel) -> () in
             let zamowienieEntity = NSEntityDescription.entity(forEntityName: "Zamowienie", in: viewContext)
@@ -178,8 +176,6 @@ extension CartView {
                 "date": ISO8601DateFormatter().date(from: result.date)!,
                 "paid": result.paid
             ])
-            
-            print(result.date)
         
             try! viewContext.save()
             completion(zamowienie as! Zamowienie)
@@ -202,7 +198,7 @@ extension CartView {
         }
         
         RequestManager.sendDataRequest(data: postData,
-                                       postfix: "/zamowienie/produkt/") { (result: [RequestData.ZamowienieProduktModel]) -> () in
+                                       postfix: "/zamowienie/produkt/") { (result: [RequestData.ZamowienieProduktModel]) in
             let zamowienieProduktEntity = NSEntityDescription.entity(forEntityName: "ZamowienieProdukt", in: viewContext)
             
             result.forEach { item in

@@ -8,6 +8,25 @@
 import CoreData
 
 struct RequestData {
+    struct KategoriaModel: Codable {
+        let title: String
+        let id: String
+    }
+                                
+    struct ProduktModel: Codable {
+        let title: String
+        let description: String
+        let image: String
+        let quantity: Int
+        let price: Double
+        let kategoria_id: Kategoria
+        let id: String
+    }
+    
+    struct Kategoria: Codable {
+        let id: String
+    }
+    
     struct KoszykModel: Codable {
         let client_id: String
         let quantity: Int
