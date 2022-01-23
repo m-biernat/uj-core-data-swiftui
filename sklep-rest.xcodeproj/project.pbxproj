@@ -22,6 +22,9 @@
 		15CD19FF279ACB46002567AA /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD19FE279ACB46002567AA /* OrderView.swift */; };
 		15CD1A01279ADA65002567AA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD1A00279ADA65002567AA /* Utils.swift */; };
 		15DF8157277912C50049BD5A /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DF8156277912C50049BD5A /* CartView.swift */; };
+		15E3E49B279D0FFE009D1604 /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E3E49A279D0FFE009D1604 /* AppTests.swift */; };
+		15E3E49D279D0FFE009D1604 /* LaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E3E49C279D0FFE009D1604 /* LaunchTests.swift */; };
+		15E3E4A4279D1223009D1604 /* BasicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E3E4A3279D1223009D1604 /* BasicTests.swift */; };
 		27326CBE25B5E55200E75CF1 /* sklep_restApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */; };
 		27326CC025B5E55200E75CF1 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27326CBF25B5E55200E75CF1 /* CategoryView.swift */; };
 		27326CC225B5E56C00E75CF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27326CC125B5E56C00E75CF1 /* Assets.xcassets */; };
@@ -30,6 +33,16 @@
 		27326CCA25B5E56C00E75CF1 /* sklep_rest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27326CC825B5E56C00E75CF1 /* sklep_rest.xcdatamodeld */; };
 		92AFF3DD273D6CBB007CBD4E /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AFF3DC273D6CBB007CBD4E /* ProductView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		15E3E49E279D0FFE009D1604 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27326CB225B5E55200E75CF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27326CB925B5E55200E75CF1;
+			remoteInfo = "sklep-rest";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		15039BA7277A2A5800EC511A /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -46,6 +59,10 @@
 		15CD19FE279ACB46002567AA /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		15CD1A00279ADA65002567AA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		15DF8156277912C50049BD5A /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		15E3E498279D0FFE009D1604 /* ui-test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ui-test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		15E3E49A279D0FFE009D1604 /* AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTests.swift; sourceTree = "<group>"; };
+		15E3E49C279D0FFE009D1604 /* LaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchTests.swift; sourceTree = "<group>"; };
+		15E3E4A3279D1223009D1604 /* BasicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTests.swift; sourceTree = "<group>"; };
 		27326CBA25B5E55200E75CF1 /* sklep-rest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "sklep-rest.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27326CBD25B5E55200E75CF1 /* sklep_restApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sklep_restApp.swift; sourceTree = "<group>"; };
 		27326CBF25B5E55200E75CF1 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
@@ -58,6 +75,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		15E3E495279D0FFE009D1604 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		27326CB725B5E55200E75CF1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -87,10 +111,21 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		15E3E499279D0FFE009D1604 /* UI Tests */ = {
+			isa = PBXGroup;
+			children = (
+				15E3E49A279D0FFE009D1604 /* AppTests.swift */,
+				15E3E49C279D0FFE009D1604 /* LaunchTests.swift */,
+				15E3E4A3279D1223009D1604 /* BasicTests.swift */,
+			);
+			path = "UI Tests";
+			sourceTree = "<group>";
+		};
 		27326CB125B5E55100E75CF1 = {
 			isa = PBXGroup;
 			children = (
 				27326CBC25B5E55200E75CF1 /* sklep-rest */,
+				15E3E499279D0FFE009D1604 /* UI Tests */,
 				27326CBB25B5E55200E75CF1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				27326CBA25B5E55200E75CF1 /* sklep-rest.app */,
+				15E3E498279D0FFE009D1604 /* ui-test.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +169,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		15E3E497279D0FFE009D1604 /* ui-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15E3E4A0279D0FFE009D1604 /* Build configuration list for PBXNativeTarget "ui-test" */;
+			buildPhases = (
+				15E3E494279D0FFE009D1604 /* Sources */,
+				15E3E495279D0FFE009D1604 /* Frameworks */,
+				15E3E496279D0FFE009D1604 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15E3E49F279D0FFE009D1604 /* PBXTargetDependency */,
+			);
+			name = "ui-test";
+			productName = "ui-test";
+			productReference = 15E3E498279D0FFE009D1604 /* ui-test.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		27326CB925B5E55200E75CF1 /* sklep-rest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27326CCE25B5E56C00E75CF1 /* Build configuration list for PBXNativeTarget "sklep-rest" */;
@@ -159,9 +213,13 @@
 		27326CB225B5E55200E75CF1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					15E3E497279D0FFE009D1604 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 27326CB925B5E55200E75CF1;
+					};
 					27326CB925B5E55200E75CF1 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -184,11 +242,19 @@
 			projectRoot = "";
 			targets = (
 				27326CB925B5E55200E75CF1 /* sklep-rest */,
+				15E3E497279D0FFE009D1604 /* ui-test */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		15E3E496279D0FFE009D1604 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		27326CB825B5E55200E75CF1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -202,6 +268,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		15E3E494279D0FFE009D1604 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15E3E4A4279D1223009D1604 /* BasicTests.swift in Sources */,
+				15E3E49D279D0FFE009D1604 /* LaunchTests.swift in Sources */,
+				15E3E49B279D0FFE009D1604 /* AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		27326CB625B5E55200E75CF1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,7 +305,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		15E3E49F279D0FFE009D1604 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27326CB925B5E55200E75CF1 /* sklep-rest */;
+			targetProxy = 15E3E49E279D0FFE009D1604 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		15E3E4A1279D0FFE009D1604 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "uj.sklep-rest.ui-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "sklep-rest";
+			};
+			name = Debug;
+		};
+		15E3E4A2279D0FFE009D1604 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "uj.sklep-rest.ui-test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "sklep-rest";
+			};
+			name = Release;
+		};
 		27326CCC25B5E56C00E75CF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -393,6 +513,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		15E3E4A0279D0FFE009D1604 /* Build configuration list for PBXNativeTarget "ui-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15E3E4A1279D0FFE009D1604 /* Debug */,
+				15E3E4A2279D0FFE009D1604 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		27326CB525B5E55200E75CF1 /* Build configuration list for PBXProject "sklep-rest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

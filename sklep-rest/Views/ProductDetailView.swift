@@ -135,7 +135,7 @@ struct ProductDetailView_Previews: PreviewProvider {
 
 extension ProductDetailView {
     func addToCart(completion: @escaping () -> Void) {
-        if(!checkIfExists(model: "Koszyk", field: "produkt.server_id", fieldValue: produkt.server_id!))
+        if(!Koszyk.checkIfExists(viewContext, field: "produkt.server_id", fieldValue: produkt.server_id!))
         {
             let postData = PostRequestData.KoszykModel(
                 client_id: sklep_appData.clientID,
@@ -187,22 +187,6 @@ extension ProductDetailView {
             try! viewContext.save()
             completion()
         }
-    }
-    
-    func checkIfExists(model: String, field: String, fieldValue: String) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: model)
-        fetchRequest.predicate = NSPredicate(format: "\(field) = %@", fieldValue)
-        
-        do {
-            let fetchResults = try viewContext.fetch(fetchRequest) as? [NSManagedObject]
-            if fetchResults!.count > 0 {
-                return true
-            }
-            return false
-        } catch {
-            print("Nie bangla2")
-        }
-        return false
     }
     
     func removeFromCart(completion: @escaping () -> Void) {
