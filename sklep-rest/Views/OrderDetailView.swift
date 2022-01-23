@@ -13,6 +13,8 @@ struct OrderDetailView: View {
 
     var zamowienie: Zamowienie
     
+    @State private var showingPayment = false
+    
     var body: some View {
         VStack(spacing: 0) {
             OrderView(zamowienie: zamowienie)
@@ -72,7 +74,7 @@ struct OrderDetailView: View {
                 VStack() {
                     Button(
                         action: {
-                            print("platnosc")
+                            showingPayment = true
                         },
                         label: {
                             Image(systemName: "dollarsign.square.fill")
@@ -83,6 +85,11 @@ struct OrderDetailView: View {
                         .background(Color.green)
                         .foregroundColor(Color.white)
                         .cornerRadius(5)
+                        .disabled(showingPayment || paid)
+                        .sheet(isPresented: $showingPayment) {
+                            PaymentView(zamowienie: zamowienie)
+                                .environment(\.managedObjectContext, viewContext)
+                        }
                 }
                 .padding(8)
             }

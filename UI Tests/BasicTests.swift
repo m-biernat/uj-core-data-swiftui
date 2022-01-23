@@ -24,6 +24,21 @@ class BasicTests: XCTestCase {
     
     func testOrderView() throws {
         XCUIApplication().tabBars["Tab Bar"].buttons["Konto"].tap()
-        XCUIApplication().buttons["Zamówienia"].tap()                                           
+        XCUIApplication().buttons["Zamówienia"].tap()
+    }
+    
+    func testMapView() throws {
+        let app = XCUIApplication()
+        app.tabBars["Tab Bar"].buttons["Mapa"].tap()
+        
+        let zoomInButton = app.buttons["Zoom In"]
+        zoomInButton.tap()
+        zoomInButton.tap()
+        zoomInButton.tap()
+        
+        let zoomOutButton = app.buttons["Zoom Out"]
+        zoomOutButton.tap()
+        zoomOutButton.tap()
+        zoomOutButton.tap()
     }
 }

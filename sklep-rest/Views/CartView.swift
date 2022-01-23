@@ -17,7 +17,11 @@ struct CartView: View {
     
     private var productsInCart: FetchedResults<Koszyk>
     
-    @State private var actionPerformed = false;
+    @State private var actionPerformed = false
+    
+    @State private var showingPayment = false
+    
+    @State private var preparedOrder: Zamowienie?
     
     var body: some View {
         let isCartEmpty = productsInCart.count < 1
@@ -77,6 +81,8 @@ struct CartView: View {
                                         actionPerformed = true
                                         makeOrder(totalCost: calculateTotalCost()) { zamowienie in
                                             fillOrder(zamowienie) {
+                                                preparedOrder = zamowienie
+                                                showingPayment = true
                                                 removeCart() {
                                                     actionPerformed = false
                                                 }
@@ -125,6 +131,14 @@ struct CartView: View {
                     }.padding(4)
                 }
             }
+            
+            Button(action: {}, label: {})
+                .disabled(true)
+                .sheet(isPresented: $showingPayment) {
+                    PaymentView(zamowienie: preparedOrder)
+                        .environment(\.managedObjectContext, viewContext)
+                }
+            
             Divider()
         }
     }

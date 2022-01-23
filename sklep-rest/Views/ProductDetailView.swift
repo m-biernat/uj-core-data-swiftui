@@ -32,13 +32,16 @@ struct ProductDetailView: View {
             .clipped()
             
             Text(produkt.title!)
-                .font(.title)
-                .lineLimit(1)
+                .font(.headline)
+                .lineLimit(2)
                 .padding(.vertical)
+                .frame(minWidth: 300)
 
             Text(produkt.desc!)
+                .font(.subheadline)
                 .lineLimit(4)
                 .padding(.horizontal)
+                .frame(minWidth: 300)
             
             Spacer()
             
