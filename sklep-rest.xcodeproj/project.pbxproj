@@ -17,6 +17,7 @@
 		159224A7278FA4F9007F3B8A /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 159224A6278FA4F9007F3B8A /* Auth0.plist */; };
 		159224AA278FA670007F3B8A /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = 159224A9278FA670007F3B8A /* Auth0 */; };
 		1595AB4A278DBAFE0071DD3F /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1595AB49278DBAFE0071DD3F /* ProductDetailView.swift */; };
+		15AADCE6279E0295009F7138 /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 15AADCE5279E0295009F7138 /* Stripe */; };
 		15B82A312798C87F0096C4F3 /* RequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B82A302798C87F0096C4F3 /* RequestData.swift */; };
 		15CD19FD279ACA2E002567AA /* OrderListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD19FC279ACA2E002567AA /* OrderListView.swift */; };
 		15CD19FF279ACB46002567AA /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD19FE279ACB46002567AA /* OrderView.swift */; };
@@ -89,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				159224AA278FA670007F3B8A /* Auth0 in Frameworks */,
+				15AADCE6279E0295009F7138 /* Stripe in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +207,7 @@
 			name = "sklep-rest";
 			packageProductDependencies = (
 				159224A9278FA670007F3B8A /* Auth0 */,
+				15AADCE5279E0295009F7138 /* Stripe */,
 			);
 			productName = "sklep-rest";
 			productReference = 27326CBA25B5E55200E75CF1 /* sklep-rest.app */;
@@ -239,6 +242,7 @@
 			mainGroup = 27326CB125B5E55100E75CF1;
 			packageReferences = (
 				159224A8278FA670007F3B8A /* XCRemoteSwiftPackageReference "Auth0.swift" */,
+				15AADCE4279E0295009F7138 /* XCRemoteSwiftPackageReference "stripe-ios" */,
 			);
 			productRefGroup = 27326CBB25B5E55200E75CF1 /* Products */;
 			projectDirPath = "";
@@ -555,6 +559,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		15AADCE4279E0295009F7138 /* XCRemoteSwiftPackageReference "stripe-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 21.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -562,6 +574,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 159224A8278FA670007F3B8A /* XCRemoteSwiftPackageReference "Auth0.swift" */;
 			productName = Auth0;
+		};
+		15AADCE5279E0295009F7138 /* Stripe */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15AADCE4279E0295009F7138 /* XCRemoteSwiftPackageReference "stripe-ios" */;
+			productName = Stripe;
 		};
 /* End XCSwiftPackageProductDependency section */
 

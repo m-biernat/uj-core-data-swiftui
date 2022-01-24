@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Stripe
 
 struct PaymentView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -14,6 +15,8 @@ struct PaymentView: View {
     @Environment(\.managedObjectContext) var viewContext
 
     var zamowienie: Zamowienie?
+    
+    @State private var paymentMethodParams: STPPaymentMethodParams?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -24,6 +27,20 @@ struct PaymentView: View {
             if zamowienie != nil {
                 OrderView(zamowienie: zamowienie!)
             }
+            
+            Spacer()
+            
+            Text("Wprowadź dane karty płatniczej")
+                .font(.caption)
+                .textCase(.uppercase)
+                .foregroundColor(Color.gray)
+                .padding(8)
+            
+            STPPaymentCardTextField.Representable
+                .init(paymentMethodParams: $paymentMethodParams)
+                .padding(.horizontal)
+            
+            Spacer()
             
             Spacer()
             

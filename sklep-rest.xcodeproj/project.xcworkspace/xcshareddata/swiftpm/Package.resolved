@@ -27,6 +27,15 @@
           "revision": "b355c569efcd409e252ccbb500d9fc2713b4d64d",
           "version": "0.12.5"
         }
+      },
+      {
+        "package": "Stripe",
+        "repositoryURL": "https://github.com/stripe/stripe-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "c4c9edabd6831218723a2c7edda2c7d2908106aa",
+          "version": "21.11.1"
+        }
       }
     ]
   },
